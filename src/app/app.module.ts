@@ -13,11 +13,15 @@ import { AppComponent } from './app.component'
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
 import { AuthService } from './core/auth/auth.service';
+import { LoginComponent } from './modules/auth/login/login.component';
+import { RegisterComponent } from './modules/auth/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
