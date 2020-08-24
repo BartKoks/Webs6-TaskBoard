@@ -11,8 +11,7 @@ export class ProjectEditComponent implements OnInit {
   constructor(private projectService: ProjectService) { }
 
   ngOnInit(): void {
-    let project = this.projectService.getProject("0Do60wu3m1VC3Xds2tOJ")
-    console.log(project);
+    let project = this.projectService.getProject("cgh7l6kUH8NPyUuH15Mg")
   }
 
 }

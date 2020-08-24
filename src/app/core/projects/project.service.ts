@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Project } from '../../shared/model/project'
 
 @Injectable({
@@ -7,31 +7,27 @@ import { Project } from '../../shared/model/project'
 })
 export class ProjectService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firebase: AngularFireDatabase) { }
 
   getProjects() {
-    return this.firestore.collection('project').snapshotChanges();
+    // return this.firestore.collection('project').snapshotChanges();
   }
   getProject(projecKey: string) {
-    return this.firestore.collection('project/').doc(projecKey).valueChanges()
+    let ref = this.firebase.list('sprint', ref => ref.orderByChild('project').equalTo("MFVhWsqQVPICw8dkC_T")).valueChanges().subscribe(res=> console.log(res))
   }
 
   createProject(project: Project) {
-    project.key = this.firestore.createId();
-    
-    return new Promise<any>((resolve, reject) =>{
-      this.firestore
-          .collection("project")
-          .add(project as Project)
-          .then(res => {}, err => reject(err));
-  });
+    const projectsRef = this.firebase.list('project');
+    projectsRef.push(project);
   }
 
-  updateProject(project: Project) {
-    this.firestore.doc('project/' + project.key).update(project);
+
+  updateProject(projectKey: string, project: Project) {
+    const itemsRef = this.firebase.list('project');
+    itemsRef.update(projectKey, project);
   }
 
   deletePolicy(projectKey: string) {
-    this.firestore.doc('project/' + projectKey).delete();
+    // this.firestore.doc('project/' + projectKey).delete();
   }
 }
