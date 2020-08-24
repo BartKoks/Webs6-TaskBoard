@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProjectCreateComponent } from './project-create/project-create.component';
 import { ProjectEditComponent } from './project-edit/project-edit.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 
 const routes: Routes = [
   {
@@ -9,8 +10,12 @@ const routes: Routes = [
     component: ProjectCreateComponent,
   },
   {
-    path: 'edit',
+    path: 'edit/:key',
     component: ProjectEditComponent,
+  },
+  {
+    path: '',
+    component: ProjectListComponent,
   },
 ];
 

@@ -1,33 +1,36 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Project } from '../../shared/model/project'
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
 
-  constructor(private firebase: AngularFireDatabase) { }
+  constructor(private fire: AngularFirestore) {
+  }
 
   getProjects() {
-    // return this.firestore.collection('project').snapshotChanges();
+    return this.fire.collection('project').valueChanges({ idField: 'key' });
   }
-  getProject(projecKey: string) {
-    let ref = this.firebase.list('sprint', ref => ref.orderByChild('project').equalTo("MFVhWsqQVPICw8dkC_T")).valueChanges().subscribe(res=> console.log(res))
+
+  getProject(projectKey: string) {
+    return this.fire.collection('project').doc(projectKey).valueChanges();
   }
 
   createProject(project: Project) {
-    const projectsRef = this.firebase.list('project');
-    projectsRef.push(project);
+    return this.fire.collection('project').add(project);
   }
 
-
-  updateProject(projectKey: string, project: Project) {
-    const itemsRef = this.firebase.list('project');
-    itemsRef.update(projectKey, project);
-  }
+  updateProject(project: Project) {
+    // Untested
+    this.fire.doc('project/' + project.key).update(project);
+   }
 
   deletePolicy(projectKey: string) {
-    // this.firestore.doc('project/' + projectKey).delete();
+    // Archive here, not delete 
+    // TODO 
   }
 }

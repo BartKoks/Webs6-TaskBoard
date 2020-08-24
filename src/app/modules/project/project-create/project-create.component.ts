@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 import { Project } from '../../../shared/model/project';
 import { ProjectService } from '../../../core/projects/project.service'
@@ -28,7 +28,6 @@ export class ProjectCreateComponent implements OnInit {
 
   ngOnSubmit(): void {
     this.project = Object.assign(this.projectForm.value);
-    console.log(this.project);
 
     this.projectService.createProject(this.project)
   }

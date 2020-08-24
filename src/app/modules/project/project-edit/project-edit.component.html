@@ -1,1 +1,6 @@
-<p>project-edit works!</p>
+<form [formGroup]="projectForm" (ngSubmit)="ngOnSubmit()">
+    <input formControlName="name" placeholder="Your name">
+    <input formControlName="description" placeholder="Your description">
+  
+    <button type="submit">Send</button>
+  </form>

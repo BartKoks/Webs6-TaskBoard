@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-12 mb-2">
+        <h3 class="d-inline">Mijn Projecten</h3>
+        <a routerLink="create" class="btn btn-success d-inline-flex float-right">
+            Nieuw Project <span class="material-icons">add</span>
+        </a>
+    </div>
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Naam</th>
+                    <th scope="col">Omschrijving</th>
+                    <th scope="col">Acties</th>
+                </tr>
+            </thead>
+            <tbody id="project">
+                <tr *ngFor="let p of projects | async">
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.description }}</td>
+                    <td>
+                        <a [routerLink]="['edit', p.key]" class="btn btn-primary d-inline-flex mr-2">
+                            Bewerken <span class="material-icons">edit</span>
+                        </a>
+                        <a routerLink="destroy" class="btn btn-danger d-inline-flex">
+                            Archiveren <span class="material-icons">archive</span>
+                        </a>
+                    </td>
+            </tbody>
+        </table>
+    </div>
+</div>

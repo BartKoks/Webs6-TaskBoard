@@ -10,15 +10,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProjectCreateComponent } from './project-create/project-create.component';
 import { ProjectEditComponent } from './project-edit/project-edit.component';
+import { ProjectListComponent } from './project-list/project-list.component';
+
+
 
 @NgModule({
-  declarations: [ProjectCreateComponent, ProjectEditComponent],
+  declarations: [ProjectCreateComponent, ProjectEditComponent, ProjectListComponent],
   imports: [
     AngularFirestoreModule,
     CommonModule,
     ProjectRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 
   ],
   providers: [AngularFirestoreModule],
