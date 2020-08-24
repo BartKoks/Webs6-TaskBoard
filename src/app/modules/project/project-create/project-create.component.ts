@@ -10,6 +10,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   templateUrl: './project-create.component.html',
   styleUrls: ['./project-create.component.sass']
 })
+
 export class ProjectCreateComponent implements OnInit {
   project: Project;
   projectForm: FormGroup;
@@ -28,7 +29,7 @@ export class ProjectCreateComponent implements OnInit {
   ngOnSubmit(): void {
     this.project = Object.assign(this.projectForm.value);
     console.log(this.project);
-    
+
     this.projectService.createProject(this.project)
   }
 
