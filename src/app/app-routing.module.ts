@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './features/login/login.component';
-import { RegisterComponent } from './features/register/register.component';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { ProjectsComponent } from './features/projects/projects.component';
- 
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
+
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'projects', component: ProjectsComponent }
+  {
+    path: 'project',
+    loadChildren: () => import('./modules/project/project.module').then(m => m.ProjectModule)
+  }
 ];
 
 @NgModule({
