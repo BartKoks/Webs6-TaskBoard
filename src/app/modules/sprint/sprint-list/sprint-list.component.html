@@ -1,1 +1,36 @@
-<p>sprint-list works!</p>
+<div class="row">
+    <div class="col-12 mb-2">
+        <h3 class="d-inline">Sprints</h3>
+        <a routerLink="sprint" class="btn btn-success d-inline-flex float-right">
+            Nieuwe sprint <span class="material-icons">add</span>
+        </a>
+    </div>
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Naam</th>
+                    <th scope="col">Omschrijving</th>
+                    <th scope="col">Startdatum</th>
+                    <th scope="col">Einddatum</th>
+                </tr>
+            </thead>
+            <tbody id="sprint">
+                <tr *ngFor="let s of sprints | async">
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.description }}</td>
+                    <td>{{ s.startdate }}</td>
+                    <td>{{ s.enddate }}</td>
+                    <td>
+                        <a [routerLink]="[s.key]" class="btn btn-success d-inline-flex mr-2">
+                            Bekijken <span class="material-icons">visibility</span>
+                        </a>
+                        <a [routerLink]="['edit', s.key]" class="btn btn-primary d-inline-flex mr-2">
+                            Bewerken <span class="material-icons">edit</span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

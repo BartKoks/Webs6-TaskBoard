@@ -15,8 +15,11 @@ const routes: Routes = [
     component: ProjectEditComponent,
   },
   {
-    path: 'view/:key',
-    component: ProjectViewComponent,
+    path: ':key',
+    component: ProjectViewComponent
+  },
+  {
+    path: ':key/sprint',
     loadChildren: () => import('../sprint/sprint.module').then(m => m.SprintModule), 
   },
   {

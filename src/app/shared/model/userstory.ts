@@ -1,5 +1,6 @@
 export class Userstory {
-    key: string;
+    projectKey: string;
+    sprintKey: string;
     name: string;
     description: string;
     status: string;

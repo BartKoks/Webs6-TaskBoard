@@ -23,7 +23,7 @@
                     <td>{{ p.status }}</td>
                     <td>{{ p.owner }}</td>
                     <td>
-                        <a [routerLink]="['view', p.key]" class="btn btn-success d-inline-flex mr-2">
+                        <a [routerLink]="[p.key]" class="btn btn-success d-inline-flex mr-2">
                             Bekijken <span class="material-icons">visibility</span>
                         </a>
                         <a [routerLink]="['edit', p.key]" class="btn btn-primary d-inline-flex mr-2">

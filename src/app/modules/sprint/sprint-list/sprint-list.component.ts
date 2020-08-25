@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { SprintService } from '../../../core/sprints/sprint.service'
+import { Sprint } from 'src/app/shared/model/sprint';
 
 @Component({
   selector: 'app-sprint-list',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SprintListComponent implements OnInit {
 
-  constructor() { }
+  projectId: string;
+  sprints: any;
+
+  constructor(private sprintService: SprintService, private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      const id = params['key'];
+      this.projectId = id;
+    });
+
+    this.sprints =this.sprintService.getSprints(this.projectId);
   }
 
 }

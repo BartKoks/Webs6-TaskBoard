@@ -1,1 +1,28 @@
-<p>sprint-create works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+          <form [formGroup]="sprintForm" (ngSubmit)="ngOnSubmit()">
+            <h3>Sprint aanmaken</h3>
+            <div class="form-group p-2">
+              <input formControlName="name" placeholder="projectnaam">
+            </div>
+            <div class="form-group p-2">
+              <input formControlName="description" placeholder="beschrijving">
+            </div>
+            <div class="form-group p-2">
+                <input type="date" formControlName="startdate" placeholder="startdatum">
+              </div>
+              <div class="form-group p-2">
+                <input type="date" formControlName="enddate" placeholder="einddatum">
+              </div>
+            <div class="form-group p-2">
+              <button type="submit" class="btn btn-primary">Aanmaken</button>
+            </div>
+          </form>
+          <div class="form-group">
+            <p *ngIf="errorMessage.length > 0" class="text-danger">
+                    {{errorMessage}}</p>
+          </div>
+        </div>
+    </div>
+  </div>

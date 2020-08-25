@@ -1,5 +1,5 @@
 export class Sprint {
-    key: string;
+    projectKey: string;
     name: string;
     description: string;
     startdate: Date;
