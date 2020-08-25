@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../../core/auth/auth.service';
+import {UserService} from '../../../core/user/user.service';
+import { User } from '../../../shared/model/user';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,13 +11,14 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  name="";
   email="";
   password="";
   message = '';
   errorMessage = '';
   error: { name: string, message: string } = { name: '', message: '' }; // for firbase error handle
 
-  constructor(private authservice: AuthService, private router:Router) { }
+  constructor(private authservice: AuthService, private userService: UserService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -29,10 +32,10 @@ export class RegisterComponent implements OnInit {
   register()
   {
     this.clearErrorMessage();
-    if (this.validateForm(this.email, this.password)) {
-      this.authservice.registerWithEmail(this.email, this.password)
+    if (this.validateForm(this.name, this.email, this.password)) {
+      this.authservice.registerWithEmail(this.name, this.email, this.password)
         .then(() => {
-          this.message = "you are register with data on firbase"
+          this.message = "U bent geregistreerd. Ga verder naar de login pagina.";
         }).catch(_error => {
           this.error = _error
           this.router.navigate(['/register'])
@@ -40,22 +43,28 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  validateForm(email, password)
+  validateForm(name, email, password)
   {
+    if(name.lenght === 0)
+    {
+      this.errorMessage = "Geef een naam op.";
+      return false;
+    }
+
     if(email.lenght === 0)
     {
-      this.errorMessage = "please enter email id";
+      this.errorMessage = "Geef een emailadres op.";
       return false;
     }
 
     if (password.lenght === 0) {
-      this.errorMessage = "please enter password";
+      this.errorMessage = "Geef een wachtwoord op.";
       return false;
     }
 
     if (password.lenght < 6)
     {
-      this.errorMessage = "password should be at least 6 char";
+      this.errorMessage = "Het wachtwoord moet minimaal 6 karakters lang zijn.";
       return false;
     }
 

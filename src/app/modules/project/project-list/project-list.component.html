@@ -11,6 +11,8 @@
                 <tr>
                     <th scope="col">Naam</th>
                     <th scope="col">Omschrijving</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Eigenaar</th>
                     <th scope="col">Acties</th>
                 </tr>
             </thead>
@@ -18,7 +20,12 @@
                 <tr *ngFor="let p of projects | async">
                     <td>{{ p.name }}</td>
                     <td>{{ p.description }}</td>
+                    <td>{{ p.status }}</td>
+                    <td>{{ p.owner }}</td>
                     <td>
+                        <a [routerLink]="['view', p.key]" class="btn btn-success d-inline-flex mr-2">
+                            Bekijken <span class="material-icons">visibility</span>
+                        </a>
                         <a [routerLink]="['edit', p.key]" class="btn btn-primary d-inline-flex mr-2">
                             Bewerken <span class="material-icons">edit</span>
                         </a>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProjectCreateComponent } from './project-create/project-create.component';
 import { ProjectEditComponent } from './project-edit/project-edit.component';
+import { ProjectViewComponent } from './project-view/project-view.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 
 const routes: Routes = [
@@ -14,9 +15,14 @@ const routes: Routes = [
     component: ProjectEditComponent,
   },
   {
+    path: 'view/:key',
+    component: ProjectViewComponent,
+    loadChildren: () => import('../sprint/sprint.module').then(m => m.SprintModule), 
+  },
+  {
     path: '',
     component: ProjectListComponent,
-  },
+  }
 ];
 
 @NgModule({

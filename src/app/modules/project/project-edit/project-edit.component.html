@@ -1,6 +1,26 @@
-<form [formGroup]="projectForm" (ngSubmit)="ngOnSubmit()">
-    <input formControlName="name" placeholder="Your name">
-    <input formControlName="description" placeholder="Your description">
-  
-    <button type="submit">Send</button>
-  </form>
+<div class="container">
+  <div class="row">
+      <div class="col-md-6" *ngIf="project">
+        <form [formGroup]="projectForm" (ngSubmit)="ngOnSubmit()">
+          <h3>{{ project.name }}</h3>
+          <div class="form-group p-2">
+            <input formControlName="name" placeholder="projectnaam">
+            
+          </div>
+          <div class="form-group p-2">
+            <input formControlName="description" placeholder="beschrijving">
+          </div>
+          <div class="form-group p-2">
+            <input formControlName="status" placeholder="project status">
+          </div>
+          <div class="form-group p-2">
+            <button type="submit" class="btn btn-primary">Aanmaken</button>
+          </div>
+        </form>
+        <div class="form-group">
+          <p *ngIf="errorMessage.length > 0" class="text-danger">
+                  {{errorMessage}}</p>
+        </div>
+      </div>
+  </div>
+</div>

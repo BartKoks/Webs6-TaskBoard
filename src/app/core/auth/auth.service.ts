@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { User } from '../../shared/model/user'
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +11,9 @@ import {Router} from '@angular/router';
 export class AuthService {
 
   userData: any = null;
+  userModelData: User = null;
 
-  constructor(public afAuth: AngularFireAuth, private router: Router) { 
+  constructor(public afAuth: AngularFireAuth, private fire: AngularFirestore, private router: Router) { 
     this.afAuth.authState.subscribe((user =>{
       if (user) {
         this.userData = user;
@@ -18,6 +22,16 @@ export class AuthService {
       } else {
         localStorage.setItem('user', null);
         JSON.parse(localStorage.getItem('user'));
+      }
+    })),
+    this.afAuth.authState.subscribe((userModel =>{
+      if (userModel) {
+        this.userModelData = Object.assign(userModel);
+        localStorage.setItem('userModel', JSON.stringify(this.userModelData));
+        JSON.parse(localStorage.getItem('userModel'));
+      } else {
+        localStorage.setItem('userModel', null);
+        JSON.parse(localStorage.getItem('userModel'));
       }
     }))
   }
@@ -32,11 +46,15 @@ export class AuthService {
   }
 
   get currentUserName(): string {
-    return this.userData['email']
+    return this.userModelData.name;
   }
 
   get currentUser(): any {
     return (this.userData !== null) ? this.userData : null;
+  }
+
+  get currentUserModel(): User {
+    return (this.userModelData !== null) ? this.userModelData : null;
   }
 
   get isUserEmailLoggedIn(): boolean {
@@ -44,10 +62,17 @@ export class AuthService {
     return (user !== null) ? true : false;
   }
 
-  async registerWithEmail(email: string, password: string) {
+  async registerWithEmail(name: string, email: string, password: string) {
     try {
       const user = await this.afAuth.createUserWithEmailAndPassword(email, password);
       this.userData = user;
+
+      let newUser: User = {
+        key: user.user.uid,
+        name: name,
+        email: email
+      };
+      this.fire.collection('user').add(newUser);
     }
     catch (error) {
       console.log(error);
@@ -60,6 +85,10 @@ export class AuthService {
     try {
       const user = await this.afAuth.signInWithEmailAndPassword(email, password);
       this.userData = user;
+      this.fire.collection<User>('user', ref => ref.where('key','==', user.user.uid)).valueChanges().subscribe(items => { 
+        const userModel = items[0]; 
+        this.userModelData = userModel;
+      });
     }
     catch (error) {
       console.log(error);
@@ -71,6 +100,7 @@ export class AuthService {
   {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
+      localStorage.removeItem('userModel');
       this.router.navigate(['login']);
     })
   }
