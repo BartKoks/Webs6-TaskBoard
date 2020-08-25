@@ -1,1 +1,39 @@
-<p>userstory-list works!</p>
+<hr/>
+<div class="row">
+    <div class="col-12 mb-2">
+        <h3 class="d-inline">Userstories</h3>
+        <a routerLink="userstory/create" class="btn btn-success d-inline-flex float-right">
+            Nieuwe userstory <span class="material-icons">add</span>
+        </a>
+    </div>
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Naam</th>
+                    <th scope="col">Omschrijving</th>
+                    <th scope="col">status</th>
+                    <th scope="col">story points</th>
+                    <th scope="col">eigenaar</th>
+                </tr>
+            </thead>
+            <tbody id="sprint">
+                <tr *ngFor="let u of userstories | async">
+                    <td>{{ u.name }}</td>
+                    <td>{{ u.description }}</td>
+                    <td>{{ u.status }}</td>
+                    <td>{{ u.storyPoints }}</td>
+                    <td>{{ u.owner }}</td>
+                    <td>
+                        <a [routerLink]="[u.key]" class="btn btn-success d-inline-flex mr-2">
+                            Bekijken <span class="material-icons">visibility</span>
+                        </a>
+                        <a [routerLink]="['edit', u.key]" class="btn btn-primary d-inline-flex mr-2">
+                            Bewerken <span class="material-icons">edit</span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

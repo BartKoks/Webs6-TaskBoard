@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserstoryListComponent implements OnInit {
 
+  userstories: any;
+
   constructor() { }
 
   ngOnInit(): void {

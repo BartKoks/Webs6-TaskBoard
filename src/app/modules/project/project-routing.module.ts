@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('../sprint/sprint.module').then(m => m.SprintModule), 
   },
   {
+    path: ':key/userstory',
+    loadChildren: () => import('../userstory/userstory.module').then(m => m.UserstoryModule), 
+  },
+  {
     path: '',
     component: ProjectListComponent,
   }

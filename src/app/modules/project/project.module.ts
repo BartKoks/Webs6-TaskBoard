@@ -6,6 +6,7 @@ import { ProjectRoutingModule } from './project-routing.module';
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 import { SprintModule } from '../sprint/sprint.module';
+import { UserstoryModule } from '../userstory/userstory.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -24,7 +25,8 @@ import { ProjectViewComponent } from './project-view/project-view.component';
     ProjectRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SprintModule
+    SprintModule,
+    UserstoryModule
   ],
   providers: [AngularFirestoreModule],
 })
