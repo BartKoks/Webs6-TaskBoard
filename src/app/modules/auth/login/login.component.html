@@ -1,27 +1,31 @@
 <div class="container">
     <div class="row justify-content-center p-4">
-        
+
         <div class="col-md-6">
             <form (ngSubmit)="login()">
-            <h3>Log in op TaskBoard</h3>
-            <div class="form-group p-2">
-            <input type="email" name="email" class="form-control" [(ngModel)]="email" placeholder="Emailadres" required>
-        </div>
-        <div class="form-group p-2">
-            <input type="password" name="password" class="form-control" [(ngModel)]="password" placeholder="Wachtwoord" required>
-        </div>
-        <div class="form-group p-2">
-            <button type="submit" class="btn btn-primary">Inloggen</button>
-            <div class="register"><a href="#" routerLink="/register">Registreer een nieuwe gebruiker.</a></div>
-        </div>
-        </form>
-        <div class="form-group">
-            <p *ngIf="errorMessage.length > 0" class="text-danger">
-                {{errorMessage}}</p>
-        
-            <p *ngIf="error.message.length > 0" class="text-danger">
-                {{error.message}} </p>
-        </div>
+                <h3>Log in op TaskBoard</h3>
+                <div class="form-group p-2">
+                    <input type="email" name="email" class="form-control" [(ngModel)]="email" placeholder="Emailadres" required>
+                </div>
+                <div class="form-group p-2">
+                    <input type="password" name="password" class="form-control" [(ngModel)]="password" placeholder="Wachtwoord" required>
+                </div>
+                <div class="row p-2">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Inloggen</button>
+                    </div>
+                    <div class="col">
+                        <a routerLink="/register" class="btn btn-outline-primary float-right">Registreren</a>
+                    </div>
+                </div>
+            </form>
+            <div class="form-group">
+                <p *ngIf="errorMessage.length > 0" class="text-danger">
+                    {{errorMessage}}</p>
+
+                <p *ngIf="error.message.length > 0" class="text-danger">
+                    {{error.message}} </p>
+            </div>
         </div>
     </div>
 </div>

@@ -18,6 +18,9 @@ export class LoginComponent implements OnInit {
   constructor(private authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.authservice.isLoggedIn){
+      this.router.navigate(['/dashboard'])
+    }
   }
 
   clearErrorMessage() {
@@ -29,7 +32,7 @@ export class LoginComponent implements OnInit {
   {
     this.clearErrorMessage();
     if (this.validateForm(this.email, this.password)) {
-      this.authservice.loginWithEmail(this.email, this.password)
+      this.authservice.SignIn(this.email, this.password)
         .then(() => {
          this.router.navigate(['/dashboard'])
         }).catch(_error => {
