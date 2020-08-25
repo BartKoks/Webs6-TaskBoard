@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Project } from '../../shared/model/project'
+import { ProjectUser } from '../../shared/model/project-user'
+import { User } from '../../shared/model/user'
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -20,8 +22,14 @@ export class ProjectService {
     return this.fire.collection('project').doc(projectKey).valueChanges();
   }
 
-  createProject(project: Project) {
-    return this.fire.collection('project').add(project);
+  createProject(project: Project, owner: User) {
+    this.fire.collection('project').add(project);
+    let projectUser: ProjectUser = {
+      project: project,
+      user: owner,
+      role: "Eigenaar"
+    };
+    this.fire.collection('project-user').add(projectUser);
   }
 
   updateProject(project: Project) {
