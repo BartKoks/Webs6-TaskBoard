@@ -10,8 +10,8 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  userData: any = null;
-  userModelData: User = null;
+  userData: any = localStorage.getItem('user');
+  nameData: any = localStorage.getItem('name');
 
   constructor(public afAuth: AngularFireAuth, private fire: AngularFirestore, private router: Router) { 
     this.afAuth.authState.subscribe((user =>{
@@ -22,16 +22,6 @@ export class AuthService {
       } else {
         localStorage.setItem('user', null);
         JSON.parse(localStorage.getItem('user'));
-      }
-    })),
-    this.afAuth.authState.subscribe((userModel =>{
-      if (userModel) {
-        this.userModelData = Object.assign(userModel);
-        localStorage.setItem('userModel', JSON.stringify(this.userModelData));
-        JSON.parse(localStorage.getItem('userModel'));
-      } else {
-        localStorage.setItem('userModel', null);
-        JSON.parse(localStorage.getItem('userModel'));
       }
     }))
   }
@@ -46,7 +36,7 @@ export class AuthService {
   }
 
   get currentUserName(): string {
-    return this.userModelData.name;
+    return this.nameData;
   }
 
   get currentUser(): any {
@@ -54,7 +44,11 @@ export class AuthService {
   }
 
   get currentUserModel(): User {
-    return (this.userModelData !== null) ? this.userModelData : null;
+    return (this.userData !== null) ? {
+      key: this.userData.uid,
+      name: this.nameData,
+      email: this.userData.email
+    } : null;
   }
 
   get isUserEmailLoggedIn(): boolean {
@@ -84,10 +78,18 @@ export class AuthService {
   {
     try {
       const user = await this.afAuth.signInWithEmailAndPassword(email, password);
-      this.userData = user;
       this.fire.collection<User>('user', ref => ref.where('key','==', user.user.uid)).valueChanges().subscribe(items => { 
-        const userModel = items[0]; 
-        this.userModelData = userModel;
+        const name = items[0].name; 
+        this.userData = user;
+
+        if (name) {
+          this.nameData = name;
+          localStorage.setItem('name', name);
+          JSON.parse(localStorage.getItem('name'));
+        } else {
+          localStorage.setItem('name', null);
+          JSON.parse(localStorage.getItem('name'));
+        }
       });
     }
     catch (error) {

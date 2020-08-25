@@ -24,6 +24,7 @@ export class ProjectService {
 
   createProject(project: Project, owner: User) {
     this.fire.collection('project').add(project);
+
     let projectUser: ProjectUser = {
       project: project,
       user: owner,
@@ -32,9 +33,8 @@ export class ProjectService {
     this.fire.collection('project-user').add(projectUser);
   }
 
-  updateProject(project: Project) {
-    // Untested
-    this.fire.doc('project/' + project.key).update(project);
+  updateProject(key: string, project: Project) {
+    this.fire.doc('project/' + key).update(project);
    }
 
   deletePolicy(projectKey: string) {

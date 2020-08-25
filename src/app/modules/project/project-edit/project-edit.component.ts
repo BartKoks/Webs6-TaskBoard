@@ -12,6 +12,7 @@ import { Project } from 'src/app/shared/model/project';
 })
 export class ProjectEditComponent implements OnInit {
   project: any;
+  id: string;
   projectForm: FormGroup;
   errorMessage = '';
 
@@ -21,21 +22,27 @@ export class ProjectEditComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       const id = params['key'];
-      this.project = this.projectService.getProject(id); 
+      this.id = id;
+      this.project = this.projectService.getProject(id)
     });
     this.projectForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       status: ['', Validators.required]
     });
-    console.log(this.project);
+    this.project.subscribe(items => { 
+      this.project = items;
+      this.projectForm.setValue({name: items.name, description: items.description, status: items.status});
+    });
   }
 
   ngOnSubmit(): void {
-    this.project = Object.assign(this.projectForm.value);
+    this.project.name = this.projectForm.controls['name'].value;
+    this.project.description = this.projectForm.controls['description'].value;
+    this.project.status = this.projectForm.controls['status'].value;
 
     if (this.validateForm(this.project)) {
-      this.projectService.updateProject(this.project);
+      this.projectService.updateProject(this.id, this.project);
       this.router.navigate(['/project']);
     }
   }

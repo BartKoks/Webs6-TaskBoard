@@ -2,16 +2,15 @@
   <div class="row">
       <div class="col-md-6" *ngIf="project">
         <form [formGroup]="projectForm" (ngSubmit)="ngOnSubmit()">
-          <h3>{{ project.name }}</h3>
+          <h3>Registreren</h3>
           <div class="form-group p-2">
-            <input formControlName="name" placeholder="projectnaam">
-            
+            <input formControlName="name" value="{{ project.name }}" placeholder="projectnaam">
           </div>
           <div class="form-group p-2">
-            <input formControlName="description" placeholder="beschrijving">
+            <input formControlName="description" value="{{ project.description }}" placeholder="beschrijving">
           </div>
           <div class="form-group p-2">
-            <input formControlName="status" placeholder="project status">
+            <input formControlName="status" value="{{ project.status }}" placeholder="project status">
           </div>
           <div class="form-group p-2">
             <button type="submit" class="btn btn-primary">Aanmaken</button>
