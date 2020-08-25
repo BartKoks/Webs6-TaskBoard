@@ -16,6 +16,10 @@ export class UserService {
     return this.fire.collection('user').valueChanges({ idField: 'key' });
   }
 
+  getUsersFromProject(projectKey: string) {
+    return this.fire.collection('project-user', ref => ref.where('project/key','==', projectKey)).valueChanges({ idField: 'key' });
+  }
+
   getUser(userKey: string) {
     return this.fire.collection('user').doc(userKey).valueChanges();
   }

@@ -9,13 +9,22 @@ import { Project } from 'src/app/shared/model/project';
 })
 export class ProjectListComponent implements OnInit {
 
+  isCollapsed = false;
   projects: any;
+  archivedProjects: any;
 
   constructor(private projectService: ProjectService) {
   }
 
   ngOnInit(): void {
     this.projects = this.projectService.getProjects();
+    this.archivedProjects = this.projectService.getArchivedProjects();
+  }
+
+  ngArchive(project: Project): void{
+    project.archived = project.archived ? false : true;
+    console.log(project);
+    this.projectService.archive(project);
   }
 
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { Userstory } from '../../../shared/model/userstory';
 import { UserstoryService } from '../../../core/userstory/userstory.service'
+import { UserService } from '../../../core/user/user.service'
 import { AuthService } from '../../../core/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -22,7 +23,7 @@ export class UserstoryCreateComponent implements OnInit {
   userstoryForm: FormGroup;
   errorMessage = '';
   
-  constructor(private formBuilder: FormBuilder, private userstoryService: UserstoryService, private authservice: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private userstoryService: UserstoryService, private userService: UserService, private authservice: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.userstory = new Userstory();
   }
 
@@ -32,6 +33,8 @@ export class UserstoryCreateComponent implements OnInit {
       const id = params['key'];
       this.projectId = id;
     });
+
+    this.projectMembers = this.userService.getUsers
 
     this.userstoryForm = this.formBuilder.group({
       name: ['', Validators.required],

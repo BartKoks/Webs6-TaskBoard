@@ -5,35 +5,75 @@
             Nieuw Project <span class="material-icons">add</span>
         </a>
     </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="default-tab" data-toggle="tab" href="#default" role="tab"
+                aria-controls="default" aria-selected="true">Projecten</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="acrchive-tab" data-toggle="tab" href="#acrchive" role="tab" aria-controls="acrchive"
+                aria-selected="false">Archief</a>
+        </li>
+    </ul>
+    <br />
     <div class="col-12">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Naam</th>
-                    <th scope="col">Omschrijving</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Eigenaar</th>
-                    <th scope="col">Acties</th>
-                </tr>
-            </thead>
-            <tbody id="project">
-                <tr *ngFor="let p of projects | async">
-                    <td>{{ p.name }}</td>
-                    <td>{{ p.description }}</td>
-                    <td>{{ p.status }}</td>
-                    <td>{{ p.owner }}</td>
-                    <td>
-                        <a [routerLink]="[p.key]" class="btn btn-success d-inline-flex mr-2">
-                            Bekijken <span class="material-icons">visibility</span>
-                        </a>
-                        <a [routerLink]="['edit', p.key]" class="btn btn-primary d-inline-flex mr-2">
-                            Bewerken <span class="material-icons">edit</span>
-                        </a>
-                        <a routerLink="destroy" class="btn btn-danger d-inline-flex">
-                            Archiveren <span class="material-icons">archive</span>
-                        </a>
-                    </td>
-            </tbody>
-        </table>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="default" role="tabpanel" aria-labelledby="default-tab">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Naam</th>
+                            <th scope="col">Omschrijving</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Eigenaar</th>
+                            <th scope="col">Acties</th>
+                        </tr>
+                    </thead>
+                    <tbody id="project">
+                        <tr *ngFor="let p of projects | async">
+                            <td>{{ p.name }}</td>
+                            <td>{{ p.description }}</td>
+                            <td>{{ p.status }}</td>
+                            <td>{{ p.owner }}</td>
+                            <td>
+                                <a [routerLink]="[p.key]" class="btn btn-success d-inline-flex mr-2">
+                                    Bekijken <span class="material-icons">visibility</span>
+                                </a>
+                                <a [routerLink]="['edit', p.key]" class="btn btn-primary d-inline-flex mr-2">
+                                    Bewerken <span class="material-icons">edit</span>
+                                </a>
+                                <button (click)="ngArchive(p)" class="btn btn-danger d-inline-flex">
+                                    Archiveren <span class="material-icons">archive</span>
+                                </button>
+                            </td>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="acrchive" role="tabpanel" aria-labelledby="acrchive-tab">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Naam</th>
+                            <th scope="col">Omschrijving</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Eigenaar</th>
+                            <th scope="col">Acties</th>
+                        </tr>
+                    </thead>
+                    <tbody id="project">
+                        <tr *ngFor="let ap of archivedProjects | async">
+                            <td>{{ ap.name }}</td>
+                            <td>{{ ap.description }}</td>
+                            <td>{{ ap.status }}</td>
+                            <td>{{ ap.owner }}</td>
+                            <td>
+                                <button (click)="ngArchive(ap)" class="btn btn-danger d-inline-flex">
+                                    De-archiveren <span class="material-icons">archive</span>
+                                </button>
+                            </td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

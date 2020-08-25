@@ -15,7 +15,11 @@ export class ProjectService {
   }
 
   getProjects() {
-    return this.fire.collection('project').valueChanges({ idField: 'key' });
+    return this.fire.collection('project', ref => ref.where('archived','==', false)).valueChanges({ idField: 'key' });
+  }
+
+  getArchivedProjects() {
+    return this.fire.collection('project', ref => ref.where('archived','==', true)).valueChanges({ idField: 'key' });
   }
 
   getProject(projectKey: string) {
@@ -23,22 +27,26 @@ export class ProjectService {
   }
 
   createProject(project: Project, owner: User) {
-    this.fire.collection('project').add(project);
+    this.fire.collection('project').add(project).then(item => {
+      const newProjectId = item.id
 
-    let projectUser: ProjectUser = {
-      project: project,
-      user: owner,
-      role: "Eigenaar"
-    };
-    this.fire.collection('project-user').add(projectUser);
+      console.log(item.id);
+      let projectUser: ProjectUser = {
+        project: project,
+        user: owner,
+        role: "Eigenaar",
+        projectKey: newProjectId
+      };
+      this.fire.collection('project-user').add(projectUser);
+    });
+    
   }
 
   updateProject(key: string, project: Project) {
     this.fire.doc('project/' + key).update(project);
    }
 
-  deletePolicy(projectKey: string) {
-    // Archive here, not delete 
-    // TODO 
+  archive(project: Project) {
+    this.fire.doc('project/' + project.key).update(project);
   }
 }
