@@ -30,40 +30,17 @@ export class ProjectCreateComponent implements OnInit {
   }
 
   ngOnSubmit(): void {
-    this.project = Object.assign(this.projectForm.value);
-    this.project.status = "nieuw";
-    this.project.owner = this.authservice.currentUserName;
-    this.project.archived = false;
+    console.log(this.authservice.currentUserName);
     
-    if (this.validateForm(this.project)) {
+    if (this.projectForm.valid) {
+      this.project = Object.assign(this.projectForm.value);
+      this.project.owner = this.authservice.currentUserName;
+      this.project.status = "nieuw";
       this.projectService.createProject(this.project, this.authservice.currentUserModel)
       this.router.navigate(['/project'])
     }
+    else {
+      this.errorMessage = "Formulier is niet geldig"
+    }
   }
-
-  validateForm(project)
-  {
-    if(project.name.lenght === 0)
-    {
-      this.errorMessage = "Geef een project naam op.";
-      return false;
-    }
-
-    if (project.name.lenght < 6)
-    {
-      this.errorMessage = "Het wachtwoord moet minimaal 6 karakters lang zijn.";
-      return false;
-    }
-
-    if (project.owner == undefined)
-    {
-      this.errorMessage = 'Er is iets fout gegaan';
-      return false;
-    }
-    this.errorMessage = '';
-
-    return true;
-  }
-
-
 }
