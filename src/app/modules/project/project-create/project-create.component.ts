@@ -32,11 +32,11 @@ export class ProjectCreateComponent implements OnInit {
   ngOnSubmit(): void {
     this.project = Object.assign(this.projectForm.value);
     this.project.status = "nieuw";
-    this.project.owner = this.authservice.currentUserName;
+    this.project.owner = this.authservice.userData.displayName;
     this.project.archived = false;
     
     if (this.validateForm(this.project)) {
-      this.projectService.createProject(this.project, this.authservice.currentUserModel)
+      this.projectService.createProject(this.project, this.authservice.userData.displayName)
       this.router.navigate(['/project'])
     }
   }

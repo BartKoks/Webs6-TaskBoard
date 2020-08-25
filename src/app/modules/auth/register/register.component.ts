@@ -33,9 +33,9 @@ export class RegisterComponent implements OnInit {
   {
     this.clearErrorMessage();
     if (this.validateForm(this.name, this.email, this.password)) {
-      this.authservice.registerWithEmail(this.name, this.email, this.password)
+      this.authservice.SignUp(this.name, this.email, this.password)
         .then(() => {
-          this.message = "U bent geregistreerd. Ga verder naar de login pagina.";
+          this.router.navigate(['/login'])
         }).catch(_error => {
           this.error = _error
           this.router.navigate(['/register'])
