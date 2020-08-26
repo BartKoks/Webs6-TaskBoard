@@ -1,25 +1,33 @@
 <div class="container">
   <div class="row">
-      <div class="col-md-6" *ngIf="project">
-        <form [formGroup]="projectForm" (ngSubmit)="ngOnSubmit()">
-          <h3>Registreren</h3>
-          <div class="form-group p-2">
-            <input formControlName="name" value="{{ project.name }}" placeholder="projectnaam">
-          </div>
-          <div class="form-group p-2">
-            <input formControlName="description" value="{{ project.description }}" placeholder="beschrijving">
-          </div>
-          <div class="form-group p-2">
-            <input formControlName="status" value="{{ project.status }}" placeholder="project status">
-          </div>
-          <div class="form-group p-2">
-            <button type="submit" class="btn btn-primary">Aanmaken</button>
-          </div>
-        </form>
-        <div class="form-group">
-          <p *ngIf="errorMessage.length > 0" class="text-danger">
-                  {{errorMessage}}</p>
-        </div>
+    <div class="col-12" *ngIf="project">
+      <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+        {{errorMessage}}
       </div>
+      <form [formGroup]="projectForm" (ngSubmit)="ngOnSubmit()">
+        <h3>Project Bewerken</h3>
+        <div class="form-group p-2">
+          <div class="form-group">
+            <label for="name">Naam</label>
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Naam" aria-describedby="nameHelp">
+            <small *ngIf="projectForm.controls['name'].hasError('required') && projectForm.controls['name'].touched" id="nameHelp" class="form-text text-danger">Naam is verplicht</small>
+          </div>
+          <div class="form-group">
+            <label for="description">Beschrijving</label>
+            <textarea class="form-control" id="description" formControlName="description" rows="3" placeholder="Beschrijving" aria-describedby="descriptionHelp"></textarea>
+            <small *ngIf="projectForm.controls['description'].hasError('required') && projectForm.controls['description'].touched" id="descriptionHelp" class="form-text text-danger">Beschrijving is
+              verplicht</small>
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <input type="text" class="form-control" id="status" formControlName="status" placeholder="Status" aria-describedby="statusHelp">
+            <small *ngIf="projectForm.controls['status'].hasError('required') && projectForm.controls['status'].touched" id="statusHelp" class="form-text text-danger">Status is verplicht</small>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success" [disabled]="!projectForm.valid">Opslaan</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

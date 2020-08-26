@@ -71,7 +71,7 @@ export class AuthService {
 
   // Setting up user data when sign in with username/password
   SetUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.afs.collection(`users/${user.uid}`);
     const userData: User = {
       key: user.uid,
       email: user.email,
