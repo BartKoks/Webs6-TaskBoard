@@ -1,28 +1,40 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-          <form [formGroup]="sprintForm" (ngSubmit)="ngOnSubmit()">
-            <h3>Sprint aanmaken</h3>
-            <div class="form-group p-2">
-              <input formControlName="name" placeholder="projectnaam">
-            </div>
-            <div class="form-group p-2">
-              <input formControlName="description" placeholder="beschrijving">
-            </div>
-            <div class="form-group p-2">
-                <input type="date" formControlName="startdate" placeholder="startdatum">
-              </div>
-              <div class="form-group p-2">
-                <input type="date" formControlName="enddate" placeholder="einddatum">
-              </div>
-            <div class="form-group p-2">
-              <button type="submit" class="btn btn-primary">Aanmaken</button>
-            </div>
-          </form>
-          <div class="form-group">
-            <p *ngIf="errorMessage.length > 0" class="text-danger">
-                    {{errorMessage}}</p>
-          </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
+      <form [formGroup]="sprintForm" (ngSubmit)="ngOnSubmit()">
+        <h3 class="p-2">Sprint aanmaken</h3>
+        <div class="form-group p-2">
+          <label for="name">Naam</label>
+          <input type="text" class="form-control" id="name" formControlName="name" aria-describedby="nameHelp">
+          <small *ngIf="sprintForm.controls['name'].hasError('required') && sprintForm.controls['name'].touched" id="nameHelp" class="form-text text-danger">Naam is verplicht</small>
         </div>
+        <div class="form-group p-2">
+          <label for="description">Beschrijving</label>
+          <textarea class="form-control" id="description" formControlName="description" rows="3" aria-describedby="descriptionHelp"></textarea>
+          <small *ngIf="sprintForm.controls['description'].hasError('required') && sprintForm.controls['description'].touched" id="descriptionHelp" class="form-text text-danger">Beschrijving is
+            verplicht</small>
+        </div>
+        <div class="form-group p-2">
+          <label for="startdate">Begin datum</label>
+          <input type="date" class="form-control" id="startdate" formControlName="startdate" aria-describedby="startdateHelp">
+          <small *ngIf="sprintForm.controls['startdate'].hasError('required') && sprintForm.controls['startdate'].touched" id="startdateHelp" class="form-text text-danger">Begin datum is verplicht</small>
+        </div>
+        <div class="form-group p-2">
+          <label for="endDate">End datum</label>
+          <input type="date" class="form-control" id="endDate" formControlName="endDate" aria-describedby="endDateHelp">
+          <small *ngIf="sprintForm.controls['endDate'].hasError('required') && sprintForm.controls['endDate'].touched" id="endDateHelp" class="form-text text-danger">Eind datuum is verplicht</small>
+        </div>
+      </form>
     </div>
   </div>
+</div>
+
+
+<!-- <div class="form-group p-2">
+  <label for="xxxx">Naam</label>
+  <input type="text" class="form-control" id="xxxx" formControlName="xxxx" placeholder="Naam" aria-describedby="xxxxHelp">
+  <small *ngIf="sprintForm.controls['xxxx'].hasError('required') && sprintForm.controls['xxxx'].touched" id="xxxxHelp" class="form-text text-danger">Naam is verplicht</small>
+</div> -->

@@ -21,14 +21,6 @@ export class SprintCreateComponent implements OnInit {
   errorMessage = '';
   constructor(private formBuilder: FormBuilder, private sprintService: SprintService, private authservice: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.sprint = new Sprint();
-  }
-
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      const id = params['key'];
-      this.projectId = id;
-    });
-
     this.sprintForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -37,11 +29,25 @@ export class SprintCreateComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      const id = params['key'];
+      this.projectId = id;
+    });
+
+
+  }
+
   ngOnSubmit(): void {
+    if (this.sprintForm.valid) {
       this.sprint = Object.assign(this.sprintForm.value);
       this.sprint.projectKey = this.projectId;
       this.sprintService.createSprint(this.sprint)
       this.router.navigate(['/project/' + this.projectId])
+    }
+    else {
+      this.errorMessage = "Formulier is niet geldig"
+    }
   }
 
 }

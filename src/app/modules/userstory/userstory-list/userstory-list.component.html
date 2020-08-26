@@ -26,9 +26,10 @@
                         <tr>
                             <th scope="col">Naam</th>
                             <th scope="col">Omschrijving</th>
-                            <th scope="col">status</th>
-                            <th scope="col">story points</th>
-                            <th scope="col">eigenaar</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Story points</th>
+                            <th scope="col">Eigenaar</th>
+                            <th scope="col" class="d-flex justify-content-end">Acties</th>
                         </tr>
                     </thead>
                     <tbody id="sprint">
@@ -38,7 +39,7 @@
                             <td>{{ u.status }}</td>
                             <td>{{ u.storyPoints }}</td>
                             <td>{{ u.owner }}</td>
-                            <td>
+                            <td class="d-flex justify-content-end">
                                 <a [routerLink]="['edit', u.key]" class="btn btn-primary d-inline-flex mr-2">
                                     Bewerken <span class="material-icons">edit</span>
                                 </a>

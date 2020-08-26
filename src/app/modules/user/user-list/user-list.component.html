@@ -11,15 +11,16 @@
                 <tr>
                     <th scope="col">Naam</th>
                     <th scope="col">Status</th>
+                    <th scope="col" class="d-flex justify-content-end">Acties</th>
                 </tr>
             </thead>
             <tbody id="sprint">
                 <tr *ngFor="let s of users | async">
                     <td>{{ s.name }}</td>
                     <td>{{ s.role }}</td>
-                    <td>
+                    <td class="d-flex justify-content-end">
                         <button *ngIf="s.role != 'Eigenaar'" (click)="ngLeave(s.key)" class="btn btn-danger d-inline-flex">
-                            Project verlaten <span class="material-icons">danger</span>
+                            Project verlaten <span class="material-icons">exit_to_app</span>
                         </button>
                     </td>
                 </tr>
