@@ -41,7 +41,7 @@
                             <td>
                                 <ng-container *ngIf="projectUsers.includes(p.key)">{{ p.owner }}</ng-container>
                             </td>
-                            <td>
+                            <td class="d-flex justify-content-end">
                                 <ng-container *ngIf="projectUsers.includes(p.key)">
                                     <a [routerLink]="[p.key]" class="btn btn-success d-inline-flex mr-2">
                                         Bekijken <span class="material-icons">visibility</span>
