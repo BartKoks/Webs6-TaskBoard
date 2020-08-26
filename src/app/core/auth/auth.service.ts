@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
 })
 
 export class AuthService {
-  userData: any; // Save logged in user data
+  userData: any = JSON.parse(localStorage.getItem('user')); // Save logged in user data
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service

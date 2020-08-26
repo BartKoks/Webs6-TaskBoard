@@ -18,6 +18,10 @@ export class ProjectService {
     return this.fire.collection('project', ref => ref.where('archived','==', false)).valueChanges({ idField: 'key' });
   }
 
+  getMemberedProjects(userKey: string) {
+    return this.fire.collection('project-user', ref => ref.where('userKey','==', userKey)).valueChanges({ idField: 'key' });
+  }
+
   getArchivedProjects() {
     return this.fire.collection('project', ref => ref.where('archived','==', true)).valueChanges({ idField: 'key' });
   }

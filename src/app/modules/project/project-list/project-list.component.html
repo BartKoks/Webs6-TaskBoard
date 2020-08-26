@@ -32,19 +32,27 @@
                     <tbody id="project">
                         <tr *ngFor="let p of projects | async">
                             <td>{{ p.name }}</td>
-                            <td>{{ p.description }}</td>
-                            <td>{{ p.status }}</td>
-                            <td>{{ p.owner }}</td>
                             <td>
-                                <a [routerLink]="[p.key]" class="btn btn-success d-inline-flex mr-2">
-                                    Bekijken <span class="material-icons">visibility</span>
-                                </a>
-                                <a [routerLink]="['edit', p.key]" class="btn btn-primary d-inline-flex mr-2">
-                                    Bewerken <span class="material-icons">edit</span>
-                                </a>
-                                <button (click)="ngArchive(p, p.key)" class="btn btn-danger d-inline-flex">
-                                    Archiveren <span class="material-icons">archive</span>
-                                </button>
+                                <ng-container *ngIf="projectUsers.includes(p.key)">{{ p.description }}</ng-container>
+                            </td>
+                            <td>
+                                <ng-container *ngIf="projectUsers.includes(p.key)">{{ p.status }}</ng-container>
+                            </td>
+                            <td>
+                                <ng-container *ngIf="projectUsers.includes(p.key)">{{ p.owner }}</ng-container>
+                            </td>
+                            <td>
+                                <ng-container *ngIf="projectUsers.includes(p.key)">
+                                    <a [routerLink]="[p.key]" class="btn btn-success d-inline-flex mr-2">
+                                        Bekijken <span class="material-icons">visibility</span>
+                                    </a>
+                                    <a [routerLink]="['edit', p.key]" class="btn btn-primary d-inline-flex mr-2">
+                                        Bewerken <span class="material-icons">edit</span>
+                                    </a>
+                                    <button (click)="ngArchive(p, p.key)" class="btn btn-danger d-inline-flex">
+                                        Archiveren <span class="material-icons">archive</span>
+                                    </button>
+                                </ng-container>
                             </td>
                     </tbody>
                 </table>
@@ -63,13 +71,21 @@
                     <tbody id="project">
                         <tr *ngFor="let ap of archivedProjects | async">
                             <td>{{ ap.name }}</td>
-                            <td>{{ ap.description }}</td>
-                            <td>{{ ap.status }}</td>
-                            <td>{{ ap.owner }}</td>
                             <td>
-                                <button (click)="ngArchive(ap, ap.key)" class="btn btn-danger d-inline-flex">
-                                    De-archiveren <span class="material-icons">archive</span>
-                                </button>
+                                <ng-container *ngIf="projectUsers.includes(ap.key)">{{ ap.description }}</ng-container>
+                            </td>
+                            <td>
+                                <ng-container *ngIf="projectUsers.includes(ap.key)">{{ ap.status }}</ng-container>
+                            </td>
+                            <td>
+                                <ng-container *ngIf="projectUsers.includes(ap.key)">{{ ap.owner }}</ng-container>
+                            </td>
+                            <td>
+                                <ng-container *ngIf="projectUsers.includes(ap.key)">
+                                    <button (click)="ngArchive(ap, ap.key)" class="btn btn-danger d-inline-flex">
+                                        De-archiveren <span class="material-icons">archive</span>
+                                    </button>
+                                </ng-container>
                             </td>
                     </tbody>
                 </table>

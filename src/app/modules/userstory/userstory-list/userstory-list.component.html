@@ -29,7 +29,6 @@
                             <th scope="col">status</th>
                             <th scope="col">story points</th>
                             <th scope="col">eigenaar</th>
-                            <th scope="col">sprint</th>
                         </tr>
                     </thead>
                     <tbody id="sprint">
@@ -39,7 +38,6 @@
                             <td>{{ u.status }}</td>
                             <td>{{ u.storyPoints }}</td>
                             <td>{{ u.owner }}</td>
-                            <td>{{ u.sprint }}</td>
                             <td>
                                 <a [routerLink]="['edit', u.key]" class="btn btn-primary d-inline-flex mr-2">
                                     Bewerken <span class="material-icons">edit</span>
