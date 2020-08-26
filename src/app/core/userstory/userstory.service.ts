@@ -13,7 +13,31 @@ export class UserstoryService {
   }
 
   getUserstories(projectKey: string) {
-    return this.fire.collection('userstory', ref => ref.where('projectKey','==', projectKey)).valueChanges({ idField: 'key' });
+    return this.fire.collection('userstory', ref => {
+      let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+      query = query.where('projectKey', '==', projectKey);
+      query = query.where('archived', '==', false);
+      return query;
+    }).valueChanges( {idField: 'key'} ); //.where('sprintKey','==', null)
+  }
+
+  getSprintUserstories(projectKey: string, sprintKey: string) {
+    return this.fire.collection('userstory', ref => {
+      let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+      query = query.where('projectKey', '==', projectKey);
+      query = query.where('sprintKey', '==', sprintKey);
+      query = query.where('archived', '==', false);
+      return query;
+    }).valueChanges( {idField: 'key'} ); //.where('sprintKey','==', null)
+  }
+
+  getArchivedUserstories(projectKey: string) {
+    return this.fire.collection('userstory', ref => {
+      let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+      query = query.where('projectKey', '==', projectKey);
+      query = query.where('archived', '==', true);
+      return query;
+    }).valueChanges( {idField: 'key'} ); //.where('sprintKey','==', null)
   }
 
   getUserstory(userstoryKey: string) {
@@ -26,10 +50,9 @@ export class UserstoryService {
 
   updateUserstory(key: string, sprint: Userstory) {
     this.fire.doc('userstory/' + key).update(sprint);
-   }
+  }
 
-  deletePolicy(projectKey: string) {
-    // Archive here, not delete 
-    // TODO 
+  archive(userstory: Userstory, key: string) {
+    this.fire.doc('userstory/' + key).update(userstory);
   }
 }

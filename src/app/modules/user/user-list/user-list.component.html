@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-12 mb-2">
+        <h3 class="d-inline">Projectleden</h3>
+        <a routerLink="user/add" class="btn btn-success d-inline-flex float-right">
+            Nieuw lid toevoegen <span class="material-icons">add</span>
+        </a>
+    </div>
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Naam</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody id="sprint">
+                <tr *ngFor="let s of users | async">
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.role }}</td>
+                    <td>
+                        <a [routerLink]="['edit', s.key]" class="btn btn-primary d-inline-flex mr-2">
+                            Bewerken <span class="material-icons">edit</span>
+                        </a>
+                        <button *ngIf="s.role != 'Eigenaar'" (click)="ngLeave(s.key)" class="btn btn-danger d-inline-flex">
+                            Project verlaten <span class="material-icons">danger</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

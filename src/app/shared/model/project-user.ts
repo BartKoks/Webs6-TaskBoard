@@ -3,7 +3,7 @@ import { User } from './user';
 
 export class ProjectUser {
     projectKey: string;
-    project: Project;
-    user: User;
+    userKey: string;
     role: string;
+    name: string;
 }

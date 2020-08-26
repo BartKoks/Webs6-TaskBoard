@@ -42,7 +42,7 @@
                                 <a [routerLink]="['edit', p.key]" class="btn btn-primary d-inline-flex mr-2">
                                     Bewerken <span class="material-icons">edit</span>
                                 </a>
-                                <button (click)="ngArchive(p)" class="btn btn-danger d-inline-flex">
+                                <button (click)="ngArchive(p, p.key)" class="btn btn-danger d-inline-flex">
                                     Archiveren <span class="material-icons">archive</span>
                                 </button>
                             </td>
@@ -67,7 +67,7 @@
                             <td>{{ ap.status }}</td>
                             <td>{{ ap.owner }}</td>
                             <td>
-                                <button (click)="ngArchive(ap)" class="btn btn-danger d-inline-flex">
+                                <button (click)="ngArchive(ap, ap.key)" class="btn btn-danger d-inline-flex">
                                     De-archiveren <span class="material-icons">archive</span>
                                 </button>
                             </td>

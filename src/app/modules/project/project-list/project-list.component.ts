@@ -18,13 +18,16 @@ export class ProjectListComponent implements OnInit {
 
   ngOnInit(): void {
     this.projects = this.projectService.getProjects();
+
+
+    
     this.archivedProjects = this.projectService.getArchivedProjects();
   }
 
-  ngArchive(project: Project): void{
+  ngArchive(project: Project, key: string): void{
     project.archived = project.archived ? false : true;
     console.log(project);
-    this.projectService.archive(project);
+    this.projectService.archive(key, project);
   }
 
 }

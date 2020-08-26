@@ -26,27 +26,24 @@ export class ProjectService {
     return this.fire.collection('project').doc(projectKey).valueChanges();
   }
 
-  createProject(project: Project, owner: User) {
+  createProject(project: Project, owner: string, displayName: string) {
     this.fire.collection('project').add(project).then(item => {
       const newProjectId = item.id
-
-      console.log(item.id);
       let projectUser: ProjectUser = {
-        project: project,
-        user: owner,
+        userKey: owner,
+        projectKey: newProjectId,
         role: "Eigenaar",
-        projectKey: newProjectId
+        name: displayName
       };
       this.fire.collection('project-user').add(projectUser);
     });
-    
   }
 
   updateProject(key: string, project: Project) {
     this.fire.doc('project/' + key).update(project);
    }
 
-  archive(project: Project) {
-    this.fire.doc('project/' + project.key).update(project);
+  archive(key: string, project: Project) {
+    this.fire.doc('project/' + key).update(project);
   }
 }

@@ -3,6 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Userstory } from '../../../shared/model/userstory';
+import { ProjectUser } from '../../../shared/model/project-user';
+import { User } from '../../../shared/model/user';
 import { UserstoryService } from '../../../core/userstory/userstory.service'
 import { UserService } from '../../../core/user/user.service'
 import { AuthService } from '../../../core/auth/auth.service';
@@ -22,11 +24,10 @@ export class UserstoryCreateComponent implements OnInit {
   userstory: Userstory
   userstoryForm: FormGroup;
   errorMessage = '';
-  
+
   constructor(private formBuilder: FormBuilder, private userstoryService: UserstoryService, private userService: UserService, private authservice: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.userstory = new Userstory();
   }
-
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
@@ -34,21 +35,25 @@ export class UserstoryCreateComponent implements OnInit {
       this.projectId = id;
     });
 
-    this.projectMembers = this.userService.getUsers
+    this.userService.getUsersFromProject(this.projectId).subscribe(items => {
+      this.projectMembers = items;
+    });
 
     this.userstoryForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      status: ['', Validators.required],
       storyPoints: ['', Validators.required],
       owner: ['', Validators.required]
     });
   }
 
   ngOnSubmit(): void {
-      this.userstory = Object.assign(this.userstoryForm.value);
-      this.userstory.projectKey = this.projectId;
-      this.router.navigate(['/project/' + this.projectId])
+    this.userstory = Object.assign(this.userstoryForm.value);
+    this.userstory.projectKey = this.projectId;
+    this.userstory.archived = false;
+    this.userstory.status = "Nieuw";
+    this.userstoryService.createUserstory(this.userstory)
+    this.router.navigate(['/project/' + this.projectId])
   }
 
 }

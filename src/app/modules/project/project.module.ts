@@ -6,6 +6,7 @@ import { ProjectRoutingModule } from './project-routing.module';
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 import { SprintModule } from '../sprint/sprint.module';
+import { UserModule } from '../user/user.module';
 import { UserstoryModule } from '../userstory/userstory.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -14,8 +15,6 @@ import { ProjectCreateComponent } from './project-create/project-create.componen
 import { ProjectEditComponent } from './project-edit/project-edit.component';
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectViewComponent } from './project-view/project-view.component';
-
-
 
 @NgModule({
   declarations: [ProjectCreateComponent, ProjectEditComponent, ProjectListComponent, ProjectViewComponent],
@@ -26,6 +25,7 @@ import { ProjectViewComponent } from './project-view/project-view.component';
     FormsModule,
     ReactiveFormsModule,
     SprintModule,
+    UserModule,
     UserstoryModule
   ],
   providers: [AngularFirestoreModule],

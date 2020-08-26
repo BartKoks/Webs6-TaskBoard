@@ -36,7 +36,7 @@ export class ProjectCreateComponent implements OnInit {
     this.project.archived = false;
     
     if (this.validateForm(this.project)) {
-      this.projectService.createProject(this.project, this.authservice.userData.displayName)
+      this.projectService.createProject(this.project, this.authservice.userData.uid, this.authservice.userData.displayName)
       this.router.navigate(['/project'])
     }
   }

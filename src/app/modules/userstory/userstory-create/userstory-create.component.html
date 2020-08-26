@@ -1,39 +1,33 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-          <form [formGroup]="userstoryForm" (ngSubmit)="ngOnSubmit()">
-            <h3>userstory aanmaken</h3>
-            <div class="form-group p-2">
-              <input formControlName="name" placeholder="projectnaam">
-            </div>
-            <div class="form-group p-2">
-              <input formControlName="description" placeholder="beschrijving">
-            </div>
-            <div class="form-group p-2">
-                <input formControlName="status" placeholder="status">
-              </div>
-              <div class="form-group p-2">
-                <input formControlName="storyPoints" placeholder="story points">
-              </div>
-              <div class="form-group p-2">
-                <input formControlName="owner" placeholder="eigenaar">
-              </div>
-              <div class="form-group p-2">
-                <select formControlName="owner">
-                    <option [ngValue]="null" disabled>Kies een eigenaar</option>
-                    <option *ngFor="let m of projectMembers" [ngValue]="prf">
-                     {{ m.name }}
-                    </option>
-                </select> 
-              </div>
-            <div class="form-group p-2">
-              <button type="submit" class="btn btn-primary">Aanmaken</button>
-            </div>
-          </form>
-          <div class="form-group">
-            <p *ngIf="errorMessage.length > 0" class="text-danger">
-                    {{errorMessage}}</p>
-          </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form [formGroup]="userstoryForm" (ngSubmit)="ngOnSubmit()">
+        <h3>userstory aanmaken</h3>
+        <div class="form-group p-2">
+          <input formControlName="name" placeholder="projectnaam">
         </div>
+        <div class="form-group p-2">
+          <input formControlName="description" placeholder="beschrijving">
+        </div>
+        <div class="form-group p-2">
+          <input formControlName="storyPoints" placeholder="story points">
+        </div>
+        <div placeholder="Kies een eigenaar" class="form-group p-2">
+          <select formControlName="owner">
+            <option [ngValue]="null" selected disabled>Kies een eigenaar</option>
+            <option *ngFor="let m of projectMembers" [ngValue]="m.name">
+              {{ m.name }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group p-2">
+          <button type="submit" class="btn btn-primary">Aanmaken</button>
+        </div>
+      </form>
+      <div class="form-group">
+        <p *ngIf="errorMessage.length > 0" class="text-danger">
+          {{errorMessage}}</p>
+      </div>
     </div>
+  </div>
 </div>

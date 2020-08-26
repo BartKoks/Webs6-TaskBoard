@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('../userstory/userstory.module').then(m => m.UserstoryModule), 
   },
   {
+    path: ':key/user',
+    loadChildren: () => import('../user/user.module').then(m => m.UserModule), 
+  },
+  {
     path: '',
     component: ProjectListComponent,
   }

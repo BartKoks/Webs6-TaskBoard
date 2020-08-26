@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form [formGroup]="userForm" (ngSubmit)="ngOnSubmit()">
+                <h3>lid toevoegen</h3>
+                <div class="form-group p-2">
+                    <input formControlName="role" placeholder="rol">
+                </div>
+                <div placeholder="Kies een eigenaar" class="form-group p-2">
+                    <select formControlName="user">
+                        <option [ngValue]="null" selected disabled>Kies een nieuw lid</option>
+                        <option *ngFor="let m of users" [ngValue]="m">
+                            {{ m.displayName }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group p-2">
+                    <button type="submit" class="btn btn-primary">Toevoegen</button>
+                  </div>
+            </form>
+            <div class="form-group">
+                <p *ngIf="errorMessage.length > 0" class="text-danger">
+                    {{errorMessage}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form [formGroup]="userstoryForm" (ngSubmit)="ngOnSubmit()">
+                <h3>userstory aanmaken</h3>
+                <div class="form-group p-2">
+                    <input formControlName="name" placeholder="naam">
+                </div>
+                <div class="form-group p-2">
+                    <input formControlName="description" placeholder="beschrijving">
+                </div>
+                <div class="form-group p-2">
+                    <input formControlName="storyPoints" placeholder="story points">
+                </div>
+                <div placeholder="Kies een sprint" class="form-group p-2">
+                    <select formControlName="sprintKey">
+                        <option [ngValue]="null" selected disabled>Kies een sprint</option>
+                        <option *ngFor="let m of projectSprints" [ngValue]="m.key">
+                            {{ m.name }}
+                        </option>
+                    </select>
+                </div>
+                <div placeholder="Kies een eigenaar" class="form-group p-2">
+                    <select formControlName="owner">
+                        <option [ngValue]="null" selected disabled>Kies een eigenaar</option>
+                        <option *ngFor="let m of projectMembers" [ngValue]="m.name">
+                            {{ m.name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group p-2">
+                    <button type="submit" class="btn btn-primary">Bijwerken</button>
+                </div>
+            </form>
+            <div class="form-group">
+                <p *ngIf="errorMessage.length > 0" class="text-danger">
+                    {{errorMessage}}</p>
+            </div>
+        </div>
+    </div>
+</div>

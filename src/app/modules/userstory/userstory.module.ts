@@ -10,11 +10,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { UserstoryCreateComponent } from './userstory-create/userstory-create.component';
 import { UserstoryListComponent } from './userstory-list/userstory-list.component';
+import { UserstoryEditComponent } from './userstory-edit/userstory-edit.component';
 
 
 
 @NgModule({
-  declarations: [UserstoryCreateComponent, UserstoryListComponent],
+  declarations: [UserstoryCreateComponent, UserstoryListComponent, UserstoryEditComponent],
   imports: [
     AngularFirestoreModule,
     CommonModule,

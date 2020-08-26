@@ -1,0 +1,45 @@
+<div class="example-container">
+    <div class="row">
+        <div class="col-3">
+            <div class="todo-container column-container">
+                <div class="list" cdkDropList #todoList="cdkDropList" [cdkDropListData]="userstories"
+                    [cdkDropListConnectedTo]="[inProgressList, doneList]" (cdkDropListDropped)="onDrop($event)">
+                    <h2>Te doen</h2>
+                    <mat-card *ngFor="let todo of newUserstories" cdkDrag>
+                        <mat-card-header>
+                            <mat-card-title>{{todo.name}}</mat-card-title>
+                            <mat-card-subtitle>{{todo.status}}</mat-card-subtitle>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="todo-container column-container">
+                <div class="list" cdkDropList #inProgressList="cdkDropList" [cdkDropListData]="userstories"
+                    [cdkDropListConnectedTo]="[todoList, doneList]" (cdkDropListDropped)="onDrop($event)">
+                    <h2>Bezig</h2>
+                    <mat-card *ngFor="let todo of doingUserstories" cdkDrag>
+                        <mat-card-header>
+                            <mat-card-title>{{todo.name}}</mat-card-title>
+                            <mat-card-subtitle>{{todo.status}}</mat-card-subtitle>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="done-container column-container">
+                <div class="list" cdkDropList #doneList="cdkDropList" [cdkDropListData]="userstories"
+                    [cdkDropListConnectedTo]="[inProgressList, todoList]" (cdkDropListDropped)="onDrop($event)">
+                    <h2>Klaar</h2>
+                    <mat-card *ngFor="let complete of doneUserstories" cdkDrag>
+                        <mat-card-header>
+                            <mat-card-title>{{complete.name}}</mat-card-title>
+                            <mat-card-subtitle>{{complete.category}}</mat-card-subtitle>
+                        </mat-card-header>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
