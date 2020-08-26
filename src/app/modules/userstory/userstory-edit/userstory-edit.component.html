@@ -2,18 +2,21 @@
     <div class="row">
         <div class="col-md-6">
             <form [formGroup]="userstoryForm" (ngSubmit)="ngOnSubmit()">
-                <h3>userstory aanmaken</h3>
+                <h2 class="p-2">Userstory bewerken</h2>
                 <div class="form-group p-2">
-                    <input formControlName="name" placeholder="naam">
+                    <label for="name">Naam</label>
+                    <input formControlName="name" class="form-control">
                 </div>
                 <div class="form-group p-2">
-                    <input formControlName="description" placeholder="beschrijving">
+                    <label for="description">Beschrijbing</label>
+                    <input formControlName="description" class="form-control" >
                 </div>
                 <div class="form-group p-2">
-                    <input formControlName="storyPoints" placeholder="story points">
+                    <label for="storyPoints">Storypoints</label>
+                    <input formControlName="storyPoints" class="form-control" >
                 </div>
                 <div placeholder="Kies een sprint" class="form-group p-2">
-                    <select formControlName="sprintKey">
+                    <select formControlName="sprintKey" class="form-control"> 
                         <option [ngValue]="null" selected disabled>Kies een sprint</option>
                         <option *ngFor="let m of projectSprints" [ngValue]="m.key">
                             {{ m.name }}
@@ -21,7 +24,7 @@
                     </select>
                 </div>
                 <div placeholder="Kies een eigenaar" class="form-group p-2">
-                    <select formControlName="owner">
+                    <select formControlName="owner" class="form-control">
                         <option [ngValue]="null" selected disabled>Kies een eigenaar</option>
                         <option *ngFor="let m of projectMembers" [ngValue]="m.name">
                             {{ m.name }}

@@ -1,20 +1,18 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <form [formGroup]="userstoryForm" (ngSubmit)="ngOnSubmit()">
         <h2 class="p-2">Userstory aanmaken</h2>
         <div class="form-group p-2">
-          <label for="name">Projectnaam</label>
+          <label for="name">Storyname</label>
           <input type="text" class="form-control" id="name" formControlname="name" aria-describedby="nameHelp">
           <small *ngIf="userstoryForm.controls['name'].hasError('required') &&userstoryForm.controls['name'].touched" id="nameHelp" class="form-text text-danger">Projectnaam is verplicht</small>
         </div>
         <div class="form-group p-2">
-          <div class="form-group p-2">
-            <label for="description">Beschrijving</label>
-            <input type="text" class="form-control" id="description" formControldescription="description" aria-describedby="descriptionHelp">
-            <small *ngIf="userstoryForm.controls['description'].hasError('required') &&userstoryForm.controls['description'].touched" id="descriptionHelp" class="form-text text-danger">Beschrijving is
-              verplicht</small>
-          </div>
+          <label for="description">Beschrijving</label>
+          <input type="text" class="form-control" id="description" formControldescription="description" aria-describedby="descriptionHelp">
+          <small *ngIf="userstoryForm.controls['description'].hasError('required') &&userstoryForm.controls['description'].touched" id="descriptionHelp" class="form-text text-danger">Beschrijving is
+            verplicht</small>
         </div>
         <div class="form-group p-2">
           <label for="storyPoints">Storypoints</label>
@@ -23,6 +21,7 @@
             verplicht</small>
         </div>
         <div placeholder="Kies een eigenaar" class="form-group p-2">
+          <label for="owner">Eigenaar</label>
           <select formControlName="owner" class="form-control">
             <option [ngValue]="null" selected disabled>Kies een eigenaar</option>
             <option *ngFor="let m of projectMembers" [ngValue]="m.name">
