@@ -2,12 +2,16 @@
     <div class="row">
         <div class="col-md-6">
             <form [formGroup]="userForm" (ngSubmit)="ngOnSubmit()">
-                <h3>lid toevoegen</h3>
+                <h2 class="p-2">Projectlid Toevoegen</h2>
                 <div class="form-group p-2">
-                    <input formControlName="role" placeholder="rol">
+                    <label for="name">Rol</label>
+
+                    <input formControlName="role" class="form-control">
                 </div>
                 <div placeholder="Kies een eigenaar" class="form-group p-2">
-                    <select formControlName="user">
+                    <label for="name">Projectlid</label>
+
+                    <select formControlName="user" class="form-control">
                         <option [ngValue]="null" selected disabled>Kies een nieuw lid</option>
                         <option *ngFor="let m of users" [ngValue]="m">
                             {{ m.displayName }}
