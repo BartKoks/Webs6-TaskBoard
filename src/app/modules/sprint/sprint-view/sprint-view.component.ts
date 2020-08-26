@@ -27,6 +27,7 @@ export class SprintViewComponent implements OnInit {
   //chartdata
   dates: Array<string> = [];
   points: Array<number> = [];
+  idealpoints: Array<number> = [];
   lineChartLegend = true;
   lineChartPlugins = [];
   lineChartType = 'line';
@@ -77,10 +78,7 @@ export class SprintViewComponent implements OnInit {
     //get linecharts
     this.lineChartData = [
       {
-        data: [
-          totalStoryPoints,
-          this.chartDataValues(totalStoryPoints, 0),
-          0], label: 'De ideale lijn'
+        data: this.idealpoints, label: 'De ideale lijn'
       },
       {
         data:
@@ -98,8 +96,11 @@ export class SprintViewComponent implements OnInit {
     let tempDate = a;
     let daysCount = b.diff(a, 'days');
 
+    this.dates = [];
+    this.points = [];
     this.dates.push(this.startdate.toString());
     this.points.push(totalStoryPoints);
+    this.idealpoints.push(totalStoryPoints);
 
     for (let i = 1; i < daysCount; i++) {
       //push points for that date
@@ -113,9 +114,12 @@ export class SprintViewComponent implements OnInit {
       //push date
       tempDate = tempDate.add(1, 'day');
       this.dates.push(tempDate.toString());
+      
+      this.idealpoints.push(this.chartDataValues(totalStoryPoints, daysCount, i));
     }
     this.dates.push(this.enddate.toString());
-    console.log(this.points);
+    this.idealpoints.push(0);
+    console.log(this.idealpoints);
 
     //set colors
     this.lineChartLabels = this.dates;
@@ -133,8 +137,8 @@ export class SprintViewComponent implements OnInit {
     this.chartReady = true;
   }
 
-  chartDataValues(totalStoryPoints: number, percentage: number): number {
-    return totalStoryPoints / 100 * percentage;
+  chartDataValues(totalStoryPoints: number, daysCount: number, percentage: number): number {
+    return totalStoryPoints / daysCount * percentage;
   }
 
   onDrop(event: CdkDragDrop<string[]>) {
@@ -151,16 +155,21 @@ export class SprintViewComponent implements OnInit {
       case "cdk-drop-list-0":
         us.status = "Nieuw";
         us.completeDate = null;
+        this.userstoryService.updateUserstory(usKey, us);
         break;
       case "cdk-drop-list-1":
         us.status = "Bezig";
         us.completeDate = null;
+        this.userstoryService.updateUserstory(usKey, us);
         break;
       case "cdk-drop-list-2":
         us.status = "Klaar";
+        this.userstoryService.updateUserstory(usKey, us);
         us.completeDate = moment(new Date()).toString();
         break;
     }
-    this.userstoryService.updateUserstory(usKey, us);
+    this.newUserstories = this.userstories.filter(t => t.status == "Nieuw");
+    this.doingUserstories = this.userstories.filter(t => t.status == "Bezig");
+    this.doneUserstories = this.userstories.filter(t => t.status == "Klaar");
   }
 }

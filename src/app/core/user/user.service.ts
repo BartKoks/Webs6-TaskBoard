@@ -18,7 +18,7 @@ export class UserService {
   }
 
   getUsers() {
-    return this.fire.collection('user').valueChanges({ idField: 'key' });
+    return this.fire.collection('user').valueChanges();
   }
 
   getUsersFromProject(projectKey: string) {

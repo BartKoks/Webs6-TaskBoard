@@ -42,7 +42,6 @@ export class UserAddMemberComponent implements OnInit {
   ngOnSubmit(): void {
     try {
       var user: User = this.userForm.controls['user'].value;
-      var user: User = this.userForm.controls['user'].value;
       var projectUser: ProjectUser = {
         role: this.userForm.controls['role'].value,
         userKey: user.key,
