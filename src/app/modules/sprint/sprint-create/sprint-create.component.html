@@ -20,12 +20,18 @@
         <div class="form-group p-2">
           <label for="startdate">Begin datum</label>
           <input type="date" class="form-control" id="startdate" formControlName="startdate" aria-describedby="startdateHelp">
-          <small *ngIf="sprintForm.controls['startdate'].hasError('required') && sprintForm.controls['startdate'].touched" id="startdateHelp" class="form-text text-danger">Begin datum is verplicht</small>
+          <small *ngIf="sprintForm.controls['startdate'].hasError('required') && sprintForm.controls['startdate'].touched" id="startdateHelp" class="form-text text-danger">Begin datum is
+            verplicht</small>
         </div>
         <div class="form-group p-2">
-          <label for="endDate">End datum</label>
-          <input type="date" class="form-control" id="endDate" formControlName="endDate" aria-describedby="endDateHelp">
-          <small *ngIf="sprintForm.controls['endDate'].hasError('required') && sprintForm.controls['endDate'].touched" id="endDateHelp" class="form-text text-danger">Eind datuum is verplicht</small>
+          <label for="enddate">End datum</label>
+          <input type="date" class="form-control" id="enddate" formControlName="enddate" aria-describedby="enddateHelp">
+          <small *ngIf="sprintForm.controls['enddate'].hasError('required') && sprintForm.controls['enddate'].touched" id="enddateHelp" class="form-text text-danger">Eind datuum is verplicht</small>
+        </div>
+        <div class="form-group p-2">
+          <div class="form-group p-2">
+            <button type="submit" class="btn btn-success" [disabled]="!sprintForm.valid">Opslaan</button>
+          </div>
         </div>
       </form>
     </div>
