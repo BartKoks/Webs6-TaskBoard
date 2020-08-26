@@ -2,18 +2,28 @@
   <div class="row">
     <div class="col-md-6">
       <form [formGroup]="userstoryForm" (ngSubmit)="ngOnSubmit()">
-        <h3>userstory aanmaken</h3>
+        <h2 class="p-2">Userstory aanmaken</h2>
         <div class="form-group p-2">
-          <input formControlName="name" placeholder="projectnaam">
+          <label for="name">Projectnaam</label>
+          <input type="text" class="form-control" id="name" formControlname="name" aria-describedby="nameHelp">
+          <small *ngIf="userstoryForm.controls['name'].hasError('required') &&userstoryForm.controls['name'].touched" id="nameHelp" class="form-text text-danger">Projectnaam is verplicht</small>
         </div>
         <div class="form-group p-2">
-          <input formControlName="description" placeholder="beschrijving">
+          <div class="form-group p-2">
+            <label for="description">Beschrijving</label>
+            <input type="text" class="form-control" id="description" formControldescription="description" aria-describedby="descriptionHelp">
+            <small *ngIf="userstoryForm.controls['description'].hasError('required') &&userstoryForm.controls['description'].touched" id="descriptionHelp" class="form-text text-danger">Beschrijving is
+              verplicht</small>
+          </div>
         </div>
         <div class="form-group p-2">
-          <input formControlName="storyPoints" placeholder="story points">
+          <label for="storyPoints">Storypoints</label>
+          <input type="text" class="form-control" id="storyPoints" formControlstoryPoints="storyPoints" aria-describedby="storyPointsHelp">
+          <small *ngIf="userstoryForm.controls['storyPoints'].hasError('required') &&userstoryForm.controls['storyPoints'].touched" id="storyPointsHelp" class="form-text text-danger">Aantal punten is
+            verplicht</small>
         </div>
         <div placeholder="Kies een eigenaar" class="form-group p-2">
-          <select formControlName="owner">
+          <select formControlName="owner" class="form-control">
             <option [ngValue]="null" selected disabled>Kies een eigenaar</option>
             <option *ngFor="let m of projectMembers" [ngValue]="m.name">
               {{ m.name }}
@@ -31,3 +41,10 @@
     </div>
   </div>
 </div>
+
+
+<!-- <div class="form-group p-2">
+  <label for="xxxx">Naam</label>
+  <input type="text" class="form-control" id="xxxx" formControlxxxx="xxxx" aria-describedby="xxxxHelp">
+  <small *ngIf="userstoryForm.controls['xxxx'].hasError('required') &&userstoryForm.controls['xxxx'].touched" id="xxxxHelp" class="form-text text-danger">Naam is verplicht</small>
+</div> -->
