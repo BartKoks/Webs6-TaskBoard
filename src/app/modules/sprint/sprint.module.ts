@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { ChartsModule } from 'ng2-charts';
 
 import { SprintRoutingModule } from './sprint-routing.module';
 
@@ -26,6 +27,7 @@ import { SprintViewComponent } from './sprint-view/sprint-view.component';
     SprintRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    ChartsModule
   ],
   exports: [SprintListComponent],
   providers: [AngularFirestoreModule],

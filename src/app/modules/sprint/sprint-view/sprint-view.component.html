@@ -7,9 +7,11 @@
                     <h2>Te doen</h2>
                     <mat-card *ngFor="let todo of newUserstories" cdkDrag>
                         <mat-card-header>
-                            <mat-card-title>{{todo.name}}</mat-card-title>
-                            <mat-card-subtitle>{{todo.status}}</mat-card-subtitle>
+                            <mat-card-title class="col-12">{{todo.name}}</mat-card-title>
+                            <mat-card-subtitle>wie: {{todo.owner}}</mat-card-subtitle>
+                            <mat-card-subtitle>story points: {{todo.storyPoints}}</mat-card-subtitle>
                         </mat-card-header>
+                        <mat-card-content>{{todo.description}}</mat-card-content>
                     </mat-card>
                 </div>
             </div>
@@ -19,11 +21,13 @@
                 <div class="list" cdkDropList #inProgressList="cdkDropList" [cdkDropListData]="userstories"
                     [cdkDropListConnectedTo]="[todoList, doneList]" (cdkDropListDropped)="onDrop($event)">
                     <h2>Bezig</h2>
-                    <mat-card *ngFor="let todo of doingUserstories" cdkDrag>
+                    <mat-card *ngFor="let doing of doingUserstories" cdkDrag>
                         <mat-card-header>
-                            <mat-card-title>{{todo.name}}</mat-card-title>
-                            <mat-card-subtitle>{{todo.status}}</mat-card-subtitle>
+                            <mat-card-title class="col-12">{{doing.name}}</mat-card-title>
+                            <mat-card-subtitle>wie: {{doing.owner}}</mat-card-subtitle>
+                            <mat-card-subtitle>story points: {{doing.storyPoints}}</mat-card-subtitle>
                         </mat-card-header>
+                        <mat-card-content>{{doing.description}}</mat-card-content>
                     </mat-card>
                 </div>
             </div>
@@ -35,11 +39,29 @@
                     <h2>Klaar</h2>
                     <mat-card *ngFor="let complete of doneUserstories" cdkDrag>
                         <mat-card-header>
-                            <mat-card-title>{{complete.name}}</mat-card-title>
-                            <mat-card-subtitle>{{complete.category}}</mat-card-subtitle>
+                            <mat-card-title class="col-12">{{complete.name}}</mat-card-title>
+                            <mat-card-subtitle>wie: {{complete.owner}}</mat-card-subtitle>
+                            <mat-card-subtitle>story points: {{complete.storyPoints}}</mat-card-subtitle>
                         </mat-card-header>
+                        <mat-card-content>{{complete.description}}</mat-card-content>
                     </mat-card>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div *ngIf="chartReady" class="chart-wrapper">
+                <canvas baseChart 
+                    [datasets]="lineChartData" 
+                    [labels]="lineChartLabels" 
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors" 
+                    [legend]="lineChartLegend" 
+                    [chartType]="lineChartType" 
+                    [plugins]="lineChartPlugins">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>

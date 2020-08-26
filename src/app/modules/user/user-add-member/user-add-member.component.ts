@@ -40,23 +40,21 @@ export class UserAddMemberComponent implements OnInit {
   }
 
   ngOnSubmit(): void {
-    var user: User = this.userForm.controls['user'].value;
-    var projectUser: ProjectUser = {
-      role: this.userForm.controls['role'].value,
-      userKey: user.key,
-      name: user.displayName,
-      projectKey: this.projectId
-    };
-    this.userService.addUserToProject(projectUser)
-    this.router.navigate(['/project/' + this.projectId])
+    try {
+      var user: User = this.userForm.controls['user'].value;
+      var user: User = this.userForm.controls['user'].value;
+      var projectUser: ProjectUser = {
+        role: this.userForm.controls['role'].value,
+        userKey: user.key,
+        name: user.displayName,
+        projectKey: this.projectId
+      };
+
+
+      this.userService.addUserToProject(projectUser)
+      this.router.navigate(['/project/' + this.projectId])
+    } catch (error) {
+      this.errorMessage = "kies een lid.";
+    }
   }
-
 }
-
-
-
-
-
-
-
-

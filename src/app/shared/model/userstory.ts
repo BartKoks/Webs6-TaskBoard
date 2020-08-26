@@ -4,7 +4,8 @@ export class Userstory {
     name: string;
     description: string;
     status: string;
-    storyPoints: string;
+    storyPoints: number;
     owner: string;
-    archived: boolean
+    archived: boolean;
+    completeDate: string;
 }

@@ -22,7 +22,7 @@
                     <td>{{ s.startdate }}</td>
                     <td>{{ s.enddate }}</td>
                     <td>
-                        <a [routerLink]="[s.key]" class="btn btn-success d-inline-flex mr-2">
+                        <a [routerLink]="[s.key, s.startdate, s.enddate]" class="btn btn-success d-inline-flex mr-2">
                             Bekijken <span class="material-icons">visibility</span>
                         </a>
                         <a [routerLink]="['edit', s.key]" class="btn btn-primary d-inline-flex mr-2">
